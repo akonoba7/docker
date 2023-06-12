@@ -1,11 +1,8 @@
-# Use the official NGINX base image
-FROM nginx
-
-# Copy custom configuration file(s) to the container
-#COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80 for web traffic
-EXPOSE 80
-
-# Start NGINX when the container launches
-CMD ["nginx", "-g", "daemon off;"]
+# syntax=docker/dockerfile:1
+   
+FROM node:18-alpine
+WORKDIR /app
+COPY . .
+RUN yarn install --production
+CMD ["node", "src/index.js"]
+EXPOSE 3000
